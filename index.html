@@ -94,6 +94,47 @@
 
     a:hover { border-bottom-color: var(--accent); }
 
+    /* ----- VERSION SWITCHER (visible for preview) ----- */
+    .version-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: 0.3rem;
+      padding: 0.4rem 0.5rem;
+      background: var(--accent-light);
+      border: 1px solid var(--accent);
+      border-radius: 7px;
+    }
+
+    .version-bar .version-label {
+      font-size: 0.55rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin-right: 0.15rem;
+    }
+
+    .version-bar a {
+      display: inline-block;
+      font-size: 0.58rem;
+      font-weight: 600;
+      padding: 0.2rem 0.55rem;
+      border-radius: 20px;
+      background: var(--surface);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      white-space: nowrap;
+    }
+
+    .version-bar a:hover,
+    .version-bar a.active {
+      background: var(--accent);
+      color: #ffffff;
+      border-bottom-color: var(--accent);
+    }
+
     /* ----- HEADER ----- */
     .header {
       display: flex;
@@ -218,6 +259,8 @@
       .program-note { font-size: 0.5rem; }
       .program-date { font-size: 0.46rem; padding: 0.02rem 0.22rem; border-radius: 8px; }
       .download-button { font-size: 0.55rem; padding: 0.3rem 0.65rem; }
+      .version-bar { padding: 0.35rem 0.4rem; gap: 0.25rem; }
+      .version-bar a { font-size: 0.5rem; padding: 0.16rem 0.4rem; }
     }
 
     @media (max-width: 380px) {
@@ -350,20 +393,47 @@
 
     .privacy-note .lock { font-size: 0.72rem; }
 
+    /* ----- VERSION VISIBILITY ----- */
+    /* Hide all version-specific content by default */
+    [data-version] { display: none; }
+
+    /* Show only the active version */
+    body[data-active="general"] [data-version="general"],
+    body[data-active="dev"] [data-version="dev"],
+    body[data-active="creative"] [data-version="creative"],
+    body[data-active="service"] [data-version="service"] {
+      display: block;
+    }
+
+    /* Grid cells need to keep their grid behavior */
+    body[data-active="general"] .grid-cell[data-version="general"],
+    body[data-active="dev"] .grid-cell[data-version="dev"],
+    body[data-active="creative"] .grid-cell[data-version="creative"],
+    body[data-active="service"] .grid-cell[data-version="service"] {
+      display: block;
+    }
+
+    body[data-active="general"] .grid-cell.span-full[data-version="general"],
+    body[data-active="dev"] .grid-cell.span-full[data-version="dev"],
+    body[data-active="creative"] .grid-cell.span-full[data-version="creative"],
+    body[data-active="service"] .grid-cell.span-full[data-version="service"] {
+      display: block;
+    }
+
     @media print {
       body { background: white; padding: 0.35in; font-size: 0.85rem; }
       .resume { box-shadow: none; border: 1px solid #ccc; padding: 0.15in; }
       .grid-cell { border: 1px solid #ddd; break-inside: avoid; }
       .privacy-badge { opacity: 0.8; }
       a { color: black; text-decoration: underline; }
-      .actions-bar, .download-button { display: none; }
+      .actions-bar, .download-button, .version-bar { display: none; }
       .privacy-note { opacity: 0.8; }
     }
   </style>
 </head>
-<body>
+<body data-active="general">
   <main class="resume" role="main" id="resume-content">
-    <!-- HEADER -->
+    <!-- HEADER (shared across all versions) -->
     <div class="header">
       <div class="header-left">
         <h1>John Allen Ogletree <span class="privacy-badge" aria-label="Privacy focused">🔒 privacy‑first</span></h1>
@@ -380,6 +450,15 @@
       </div>
     </div>
 
+    <!-- VERSION SWITCHER (preview only — remove this block when you go live) -->
+    <div class="version-bar">
+      <span class="version-label">Preview:</span>
+      <a href="?v=general"  data-version-link="general">General</a>
+      <a href="?v=dev"      data-version-link="dev">Development</a>
+      <a href="?v=creative" data-version-link="creative">Creative</a>
+      <a href="?v=service"  data-version-link="service">Customer Service</a>
+    </div>
+
     <!-- DOWNLOAD BUTTON -->
     <div class="actions-bar">
       <button type="button" id="download-pdf" class="download-button">⬇ Download PDF</button>
@@ -387,8 +466,10 @@
 
     <!-- GRID -->
     <div class="grid-2x2">
-      <section class="grid-cell" aria-labelledby="exp-heading">
-        <h2 id="exp-heading">Professional Experience</h2>
+
+      <!-- ============ GENERAL VERSION ============ -->
+      <section class="grid-cell" data-version="general" aria-labelledby="exp-heading-general">
+        <h2 id="exp-heading-general">Professional Experience</h2>
         <div class="item">
           <div class="item-header">
             <span class="item-title">Cheeseburger Bobby's</span>
@@ -438,8 +519,8 @@
         </div>
       </section>
 
-      <section class="grid-cell" aria-labelledby="skills-heading">
-        <h2 id="skills-heading">Skills &amp; Focus</h2>
+      <section class="grid-cell" data-version="general" aria-labelledby="skills-heading-general">
+        <h2 id="skills-heading-general">Skills &amp; Focus</h2>
         <ul class="skill-list">
           <li>Character Animation</li>
           <li>Digital Painting</li>
@@ -452,8 +533,8 @@
         </ul>
       </section>
 
-      <section class="grid-cell span-full" aria-labelledby="edu-heading">
-        <h2 id="edu-heading">Education</h2>
+      <section class="grid-cell span-full" data-version="general" aria-labelledby="edu-heading-general">
+        <h2 id="edu-heading-general">Education</h2>
         <div class="item">
           <div class="item-header">
             <span class="item-title">MFA, Character Animation</span>
@@ -487,8 +568,226 @@
           </div>
         </div>
       </section>
+
+      <!-- ============ DEV VERSION ============ -->
+      <section class="grid-cell" data-version="dev" aria-labelledby="exp-heading-dev">
+        <h2 id="exp-heading-dev">Development Experience</h2>
+        <div class="item">
+          <div class="item-header">
+            <span class="item-title">ntkrz</span>
+            <span class="item-date">2018</span>
+          </div>
+          <div class="item-sub">Internal browser extension</div>
+          <div class="item-description">Built a browser extension connected to a local student dataset for internal use.</div>
+        </div>
+        <div class="item">
+          <div class="item-header">
+            <span class="item-title">Music App Prototype</span>
+            <span class="item-date">2019</span>
+          </div>
+          <div class="item-sub">UI Prototype</div>
+          <div class="item-description">Designed and prototyped a music client interface as a portfolio piece.</div>
+        </div>
+        <div class="item">
+          <div class="item-header">
+            <span class="item-title">Self-Directed Development</span>
+            <span class="item-date">2026 – present</span>
+          </div>
+          <div class="item-description">Ongoing study of web development, tooling, and interactive media.</div>
+        </div>
+      </section>
+
+      <section class="grid-cell" data-version="dev" aria-labelledby="skills-heading-dev">
+        <h2 id="skills-heading-dev">Technical Skills</h2>
+        <ul class="skill-list">
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JavaScript</li>
+          <li>Git</li>
+          <li>Browser Extensions</li>
+          <li>UI Prototyping</li>
+          <li>Adobe Creative Suite</li>
+          <li>Problem Solving</li>
+        </ul>
+      </section>
+
+      <section class="grid-cell span-full" data-version="dev" aria-labelledby="edu-heading-dev">
+        <h2 id="edu-heading-dev">Education</h2>
+        <div class="item">
+          <div class="item-header">
+            <span class="item-title">Development Program</span>
+            <span class="item-date">2026 – present</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-header">
+            <span class="item-title">MFA, Character Animation</span>
+            <span class="item-date">2023 – present</span>
+          </div>
+          <div class="item-description">Strengthens visual, narrative, and technical storytelling skills.</div>
+        </div>
+      </section>
+
+      <!-- ============ CREATIVE VERSION ============ -->
+      <section class="grid-cell" data-version="creative" aria-labelledby="exp-heading-creative">
+        <h2 id="exp-heading-creative">Creative Experience</h2>
+        <div class="item">
+          <div class="item-header">
+            <span class="item-title">Fallen Angel</span>
+            <span class="item-date">2019</span>
+          </div>
+          <div class="item-sub">Digital Painting</div>
+          <div class="item-description">Personal digital painting exploring mood, light, and character design.</div>
+        </div>
+        <div class="item">
+          <div class="item-header">
+            <span class="item-title">Music App Prototype</span>
+            <span class="item-date">2019</span>
+          </div>
+          <div class="item-sub">UI / Visual Design</div>
+          <div class="item-description">Visual design and layout for a music client interface.</div>
+        </div>
+        <div class="item">
+          <div class="item-header">
+            <span class="item-title">Brand Ambassador</span>
+            <span class="item-date">2 years</span>
+          </div>
+          <div class="item-sub">Known in Heaven</div>
+        </div>
+      </section>
+
+      <section class="grid-cell" data-version="creative" aria-labelledby="skills-heading-creative">
+        <h2 id="skills-heading-creative">Creative Skills</h2>
+        <ul class="skill-list">
+          <li>Character Animation</li>
+          <li>Digital Painting</li>
+          <li>Graphic Design</li>
+          <li>Storyboarding</li>
+          <li>Visual Storytelling</li>
+          <li>Adobe Creative Suite</li>
+          <li>Vinyl Cutting &amp; Application</li>
+          <li>Layout &amp; Typography</li>
+        </ul>
+      </section>
+
+      <section class="grid-cell span-full" data-version="creative" aria-labelledby="edu-heading-creative">
+        <h2 id="edu-heading-creative">Education</h2>
+        <div class="item">
+          <div class="item-header">
+            <span class="item-title">MFA, Character Animation</span>
+            <span class="item-date">2023 – present</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-header">
+            <span class="item-title">High School — Graphic Design</span>
+            <span class="item-date">2018 – 2022</span>
+          </div>
+          <div class="program-group">
+            <div class="program">
+              <div class="program-header">
+                <span class="program-title">Vinyl Workshop</span>
+              </div>
+              <div class="program-note">Hands-on vinyl cutting &amp; application</div>
+            </div>
+            <div class="program">
+              <div class="program-header">
+                <span class="program-title">Graphic Design</span>
+              </div>
+              <div class="program-note">Layout, typography, digital design</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SERVICE VERSION ============ -->
+      <section class="grid-cell" data-version="service" aria-labelledby="exp-heading-service">
+        <h2 id="exp-heading-service">Customer Service Experience</h2>
+        <div class="item">
+          <div class="item-header">
+            <span class="item-title">Cheeseburger Bobby's</span>
+            <span class="item-date">3 years total</span>
+          </div>
+          <div class="program-group">
+            <div class="program">
+              <div class="program-header">
+                <span class="program-title">Cashier</span>
+                <span class="program-date">2 years</span>
+              </div>
+              <div class="program-note">Front-facing customer service, POS operations, order accuracy.</div>
+            </div>
+            <div class="program">
+              <div class="program-header">
+                <span class="program-title">Tech</span>
+                <span class="program-date">3 years (when needed)</span>
+              </div>
+              <div class="program-note">On-call troubleshooting for POS systems and equipment.</div>
+            </div>
+            <div class="program">
+              <div class="program-header">
+                <span class="program-title">Dishwasher</span>
+                <span class="program-date">3 years</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-header">
+            <span class="item-title">Brand Ambassador</span>
+            <span class="item-date">2 years</span>
+          </div>
+          <div class="item-sub">Known in Heaven</div>
+          <div class="item-description">Represented the brand at events and engaged directly with customers.</div>
+        </div>
+        <div class="item">
+          <div class="item-header">
+            <span class="item-title">Brand Ambassador</span>
+            <span class="item-date">1 year</span>
+          </div>
+          <div class="item-sub">Saved by Christ Apparel</div>
+        </div>
+        <div class="item">
+          <div class="item-header">
+            <span class="item-title">Helper</span>
+            <span class="item-date">Approx. 1 year</span>
+          </div>
+          <div class="item-sub">Adventure Crossing</div>
+        </div>
+      </section>
+
+      <section class="grid-cell" data-version="service" aria-labelledby="skills-heading-service">
+        <h2 id="skills-heading-service">Customer-Facing Skills</h2>
+        <ul class="skill-list">
+          <li>Customer Service</li>
+          <li>POS Operations</li>
+          <li>Tech Troubleshooting</li>
+          <li>Team Communication</li>
+          <li>Brand Representation</li>
+          <li>Reliability</li>
+          <li>Multitasking</li>
+          <li>Problem Solving</li>
+        </ul>
+      </section>
+
+      <section class="grid-cell span-full" data-version="service" aria-labelledby="edu-heading-service">
+        <h2 id="edu-heading-service">Education</h2>
+        <div class="item">
+          <div class="item-header">
+            <span class="item-title">High School</span>
+            <span class="item-date">2018 – 2022</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-header">
+            <span class="item-title">MFA, Character Animation</span>
+            <span class="item-date">2023 – present</span>
+          </div>
+        </div>
+      </section>
+
     </div>
 
+    <!-- PRIVACY NOTE -->
     <div class="privacy-note">
       <span class="lock" aria-hidden="true">🔐</span>
       <span>This page is fully self‑contained. You can download the PDF directly — no email, no sign‑up, no contact form, and no waiting. Nothing is sent anywhere and nothing is stored. Everything happens on your own device.</span>
@@ -497,6 +796,23 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script>
+    // ----- VERSION SWITCHER -----
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const requested = (params.get('v') || 'general').toLowerCase();
+      const allowed = ['general', 'dev', 'creative', 'service'];
+      const active = allowed.includes(requested) ? requested : 'general';
+      document.body.setAttribute('data-active', active);
+
+      // Mark the active link in the preview bar
+      document.querySelectorAll('[data-version-link]').forEach(function (link) {
+        if (link.getAttribute('data-version-link') === active) {
+          link.classList.add('active');
+        }
+      });
+    })();
+
+    // ----- PDF DOWNLOAD -----
     document.getElementById('download-pdf').addEventListener('click', function () {
       const btn = this;
       btn.disabled = true;
@@ -504,24 +820,28 @@
 
       const element = document.getElementById('resume-content');
 
-      // Temporarily hide the download button + privacy note during capture
       const actionsBar = document.querySelector('.actions-bar');
       const privacyNote = document.querySelector('.privacy-note');
+      const versionBar = document.querySelector('.version-bar');
       if (actionsBar) actionsBar.style.display = 'none';
       if (privacyNote) privacyNote.style.display = 'none';
+      if (versionBar) versionBar.style.display = 'none';
+
+      const active = document.body.getAttribute('data-active') || 'general';
+      const filename = 'John-Ogletree-Resume-' + active + '.pdf';
 
       const opt = {
         margin:       [0.3, 0.3, 0.3, 0.3],
-        filename:     'John-Ogletree-Resume.pdf',
+        filename:     filename,
         image:        { type: 'jpeg', quality: 0.98 },
         html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
         jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
       };
 
       html2pdf().set(opt).from(element).save().then(function () {
-        // Restore UI
         if (actionsBar) actionsBar.style.display = '';
         if (privacyNote) privacyNote.style.display = '';
+        if (versionBar) versionBar.style.display = '';
         btn.disabled = false;
         btn.textContent = '⬇ Download PDF';
       });
