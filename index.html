@@ -5,14 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
   <meta name="referrer" content="no-referrer">
   <meta name="robots" content="noindex, nofollow">
-  <title>Privacy‑Focused Resume · Self‑Contained</title>
+  <title>Resume</title>
   <style>
     /* ----- RESET & GLOBAL ----- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
       --bg: #f9fafc;
@@ -43,10 +39,7 @@
       }
     }
 
-    html {
-      font-size: 100%;
-      scroll-behavior: smooth;
-    }
+    html { font-size: 100%; scroll-behavior: smooth; }
 
     body {
       background-color: var(--bg);
@@ -60,7 +53,6 @@
       align-items: center;
       justify-content: flex-start;
       padding: 0.3rem 0.6rem 0.6rem;
-      transition: background-color 0.2s ease, color 0.2s ease;
     }
 
     .resume {
@@ -71,20 +63,11 @@
       box-shadow: var(--shadow);
       border: 1px solid var(--border);
       padding: 0.85rem 0.95rem 0.95rem;
-      transition: background 0.2s, border 0.2s, box-shadow 0.2s;
     }
 
-    h1, h2, h3, h4 {
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      line-height: 1.1;
-    }
+    h1, h2, h3, h4 { font-weight: 600; letter-spacing: -0.01em; line-height: 1.1; }
 
-    h1 {
-      font-size: 1.4rem;
-      margin-bottom: 0.1rem;
-      color: var(--text-primary);
-    }
+    h1 { font-size: 1.4rem; margin-bottom: 0.1rem; color: var(--text-primary); }
 
     h2 {
       font-size: 0.82rem;
@@ -96,22 +79,10 @@
       letter-spacing: 0.05em;
     }
 
-    h3 {
-      font-size: 0.85rem;
-      margin-bottom: 0.08rem;
-      color: var(--text-primary);
-    }
+    h3 { font-size: 0.85rem; margin-bottom: 0.08rem; color: var(--text-primary); }
+    h4 { font-size: 0.78rem; font-weight: 500; color: var(--text-secondary); margin-bottom: 0.1rem; }
 
-    h4 {
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-      margin-bottom: 0.1rem;
-    }
-
-    p, li {
-      color: var(--text-secondary);
-    }
+    p, li { color: var(--text-secondary); }
 
     a {
       color: var(--accent);
@@ -121,9 +92,7 @@
       transition: border-color 0.2s, color 0.2s;
     }
 
-    a:hover {
-      border-bottom-color: var(--accent);
-    }
+    a:hover { border-bottom-color: var(--accent); }
 
     /* ----- HEADER ----- */
     .header {
@@ -135,9 +104,7 @@
       margin-bottom: 0.25rem;
     }
 
-    .header-left {
-      flex: 1 1 240px;
-    }
+    .header-left { flex: 1 1 240px; }
 
     .header-right {
       flex: 0 1 auto;
@@ -149,10 +116,7 @@
       margin-bottom: 0.05rem;
     }
 
-    .header-right a {
-      display: inline-block;
-      white-space: nowrap;
-    }
+    .header-right a { display: inline-block; white-space: nowrap; }
 
     .privacy-badge {
       display: inline-block;
@@ -170,25 +134,24 @@
       white-space: nowrap;
     }
 
-    /* ----- DOWNLOAD BUTTON BAR ----- */
+    /* ----- DOWNLOAD BUTTON ----- */
     .actions-bar {
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      gap: 0.4rem;
-      margin-top: 0.25rem;
+      margin-top: 0.3rem;
     }
 
     .download-button {
       display: inline-block;
       cursor: pointer;
-      background: var(--accent-light);
-      color: var(--accent);
-      font-size: 0.58rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
+      background: var(--accent);
+      color: #ffffff;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
-      padding: 0.2rem 0.6rem;
+      padding: 0.35rem 0.8rem;
       border-radius: 20px;
       border: 1px solid var(--accent);
       transition: background 0.2s, color 0.2s;
@@ -198,11 +161,16 @@
     }
 
     .download-button:hover {
-      background: var(--accent);
-      color: #ffffff;
+      background: var(--accent-light);
+      color: var(--accent);
     }
 
-    /* ----- 2×2 GRID LAYOUT (always 2×2, even on mobile) ----- */
+    .download-button:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    /* ----- 2×2 GRID ----- */
     .grid-2x2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -216,7 +184,6 @@
       border: 1px solid var(--border);
       border-radius: 7px;
       padding: 0.5rem 0.6rem 0.55rem;
-      transition: border-color 0.2s;
     }
 
     .grid-cell h2 {
@@ -226,163 +193,51 @@
       margin-bottom: 0.3rem;
     }
 
-    .grid-cell.span-full {
-      grid-column: 1 / -1;
-    }
+    .grid-cell.span-full { grid-column: 1 / -1; }
 
-    /* ----- MOBILE: keep 2×2, tighten further ----- */
     @media (max-width: 700px) {
-      body {
-        padding: 0.25rem 0.35rem 0.5rem;
-      }
-      .resume {
-        padding: 0.6rem 0.5rem 0.65rem;
-      }
-      h1 {
-        font-size: 1.05rem;
-      }
-      .header-right {
-        text-align: left;
-        width: 100%;
-        align-self: flex-start;
-        font-size: 0.6rem;
-      }
-      .grid-2x2 {
-        gap: 0.4rem 0.35rem;
-        margin-top: 0.3rem;
-      }
-      .grid-cell {
-        padding: 0.4rem 0.4rem 0.45rem;
-        border-radius: 6px;
-      }
-      .grid-cell h2 {
-        font-size: 0.65rem;
-        padding-bottom: 0.08rem;
-        margin-bottom: 0.25rem;
-        border-bottom-width: 1px;
-      }
-      .item {
-        margin-bottom: 0.3rem;
-      }
-      .item-header {
-        gap: 0.1rem;
-        margin-bottom: 0.03rem;
-      }
-      .item-title {
-        font-size: 0.62rem;
-        line-height: 1.15;
-      }
-      .item-sub {
-        font-size: 0.58rem;
-        line-height: 1.2;
-      }
-      .item-date {
-        font-size: 0.5rem;
-        padding: 0.02rem 0.25rem;
-        border-radius: 9px;
-      }
-      .item-description {
-        font-size: 0.55rem;
-        margin-top: 0.08rem;
-      }
-      .skill-list {
-        gap: 0.14rem 0.18rem;
-        margin: 0.12rem 0 0;
-      }
-      .skill-list li {
-        font-size: 0.5rem;
-        padding: 0.06rem 0.3rem;
-        border-radius: 10px;
-      }
-      .contact-line {
-        gap: 0.12rem 0.35rem;
-        margin: 0.12rem 0 0;
-        font-size: 0.55rem;
-      }
-      .contact-line .icon {
-        font-size: 0.62rem;
-      }
-      .privacy-badge {
-        font-size: 0.44rem;
-        padding: 0.07rem 0.3rem;
-        margin-left: 0.2rem;
-      }
-      .program {
-        padding-left: 0.35rem;
-        margin-left: 0.15rem;
-      }
-      .program-title {
-        font-size: 0.58rem;
-      }
-      .program-note {
-        font-size: 0.5rem;
-      }
-      .program-date {
-        font-size: 0.46rem;
-        padding: 0.02rem 0.22rem;
-        border-radius: 8px;
-      }
-      .download-button {
-        font-size: 0.48rem;
-        padding: 0.16rem 0.45rem;
-      }
-      .actions-bar {
-        gap: 0.3rem;
-      }
+      body { padding: 0.25rem 0.35rem 0.5rem; }
+      .resume { padding: 0.6rem 0.5rem 0.65rem; }
+      h1 { font-size: 1.05rem; }
+      .header-right { text-align: left; width: 100%; align-self: flex-start; font-size: 0.6rem; }
+      .grid-2x2 { gap: 0.4rem 0.35rem; margin-top: 0.3rem; }
+      .grid-cell { padding: 0.4rem 0.4rem 0.45rem; border-radius: 6px; }
+      .grid-cell h2 { font-size: 0.65rem; padding-bottom: 0.08rem; margin-bottom: 0.25rem; border-bottom-width: 1px; }
+      .item { margin-bottom: 0.3rem; }
+      .item-header { gap: 0.1rem; margin-bottom: 0.03rem; }
+      .item-title { font-size: 0.62rem; line-height: 1.15; }
+      .item-sub { font-size: 0.58rem; line-height: 1.2; }
+      .item-date { font-size: 0.5rem; padding: 0.02rem 0.25rem; border-radius: 9px; }
+      .skill-list { gap: 0.14rem 0.18rem; margin: 0.12rem 0 0; }
+      .skill-list li { font-size: 0.5rem; padding: 0.06rem 0.3rem; border-radius: 10px; }
+      .contact-line { gap: 0.12rem 0.35rem; margin: 0.12rem 0 0; font-size: 0.55rem; }
+      .contact-line .icon { font-size: 0.62rem; }
+      .privacy-badge { font-size: 0.44rem; padding: 0.07rem 0.3rem; margin-left: 0.2rem; }
+      .program { padding-left: 0.35rem; margin-left: 0.15rem; }
+      .program-title { font-size: 0.58rem; }
+      .program-note { font-size: 0.5rem; }
+      .program-date { font-size: 0.46rem; padding: 0.02rem 0.22rem; border-radius: 8px; }
+      .download-button { font-size: 0.55rem; padding: 0.3rem 0.65rem; }
     }
 
     @media (max-width: 380px) {
-      .resume {
-        padding: 0.5rem 0.4rem 0.55rem;
-      }
-      h1 {
-        font-size: 0.95rem;
-      }
-      .grid-2x2 {
-        gap: 0.3rem 0.25rem;
-      }
-      .grid-cell {
-        padding: 0.35rem 0.35rem 0.4rem;
-      }
-      .grid-cell h2 {
-        font-size: 0.6rem;
-      }
-      .item-title {
-        font-size: 0.58rem;
-      }
-      .item-sub {
-        font-size: 0.53rem;
-      }
-      .skill-list li {
-        font-size: 0.46rem;
-        padding: 0.05rem 0.25rem;
-      }
-      .program-title {
-        font-size: 0.54rem;
-      }
-      .program-note {
-        font-size: 0.47rem;
-      }
-      .program-date {
-        font-size: 0.43rem;
-      }
-      .download-button {
-        font-size: 0.44rem;
-        padding: 0.14rem 0.4rem;
-      }
-      .actions-bar {
-        gap: 0.25rem;
-      }
+      .resume { padding: 0.5rem 0.4rem 0.55rem; }
+      h1 { font-size: 0.95rem; }
+      .grid-2x2 { gap: 0.3rem 0.25rem; }
+      .grid-cell { padding: 0.35rem 0.35rem 0.4rem; }
+      .grid-cell h2 { font-size: 0.6rem; }
+      .item-title { font-size: 0.58rem; }
+      .item-sub { font-size: 0.53rem; }
+      .skill-list li { font-size: 0.46rem; padding: 0.05rem 0.25rem; }
+      .program-title { font-size: 0.54rem; }
+      .program-note { font-size: 0.47rem; }
+      .program-date { font-size: 0.43rem; }
+      .download-button { font-size: 0.5rem; padding: 0.28rem 0.55rem; }
     }
 
     /* ----- LISTS & ITEMS ----- */
-    .item {
-      margin-bottom: 0.45rem;
-    }
-
-    .item:last-child {
-      margin-bottom: 0;
-    }
+    .item { margin-bottom: 0.45rem; }
+    .item:last-child { margin-bottom: 0; }
 
     .item-header {
       display: flex;
@@ -393,17 +248,8 @@
       margin-bottom: 0.05rem;
     }
 
-    .item-title {
-      font-weight: 600;
-      color: var(--text-primary);
-      font-size: 0.78rem;
-    }
-
-    .item-sub {
-      font-weight: 500;
-      color: var(--text-secondary);
-      font-size: 0.72rem;
-    }
+    .item-title { font-weight: 600; color: var(--text-primary); font-size: 0.78rem; }
+    .item-sub { font-weight: 500; color: var(--text-secondary); font-size: 0.72rem; }
 
     .item-date {
       font-size: 0.6rem;
@@ -416,16 +262,10 @@
       border: 1px solid var(--border);
     }
 
-    .item-description {
-      margin-top: 0.1rem;
-      font-size: 0.68rem;
-      color: var(--text-secondary);
-    }
+    .item-description { margin-top: 0.1rem; font-size: 0.68rem; color: var(--text-secondary); }
 
     /* ----- GROUPED PROGRAMS ----- */
-    .program-group {
-      margin-top: 0.18rem;
-    }
+    .program-group { margin-top: 0.18rem; }
 
     .program {
       border-left: 1.5px solid var(--border);
@@ -434,9 +274,7 @@
       margin-top: 0.22rem;
     }
 
-    .program:first-child {
-      margin-top: 0;
-    }
+    .program:first-child { margin-top: 0; }
 
     .program-header {
       display: flex;
@@ -447,18 +285,8 @@
       margin-bottom: 0.03rem;
     }
 
-    .program-title {
-      font-weight: 600;
-      font-size: 0.72rem;
-      color: var(--text-primary);
-    }
-
-    .program-note {
-      font-size: 0.6rem;
-      color: var(--text-muted);
-      font-style: italic;
-      margin-top: 0.03rem;
-    }
+    .program-title { font-weight: 600; font-size: 0.72rem; color: var(--text-primary); }
+    .program-note { font-size: 0.6rem; color: var(--text-muted); font-style: italic; margin-top: 0.03rem; }
 
     .program-date {
       font-size: 0.56rem;
@@ -489,15 +317,8 @@
       color: var(--text-primary);
     }
 
-    ul.bullet {
-      padding-left: 0.9rem;
-      margin-top: 0.12rem;
-      color: var(--text-secondary);
-    }
-
-    ul.bullet li {
-      margin-bottom: 0.08rem;
-    }
+    ul.bullet { padding-left: 0.9rem; margin-top: 0.12rem; color: var(--text-secondary); }
+    ul.bullet li { margin-bottom: 0.08rem; }
 
     /* ----- CONTACT LINE ----- */
     .contact-line {
@@ -509,19 +330,10 @@
       color: var(--text-muted);
     }
 
-    .contact-line span {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.2rem;
-    }
+    .contact-line span { display: inline-flex; align-items: center; gap: 0.2rem; }
+    .contact-line .icon { font-size: 0.78rem; opacity: 0.75; font-family: var(--font-mono); }
 
-    .contact-line .icon {
-      font-size: 0.78rem;
-      opacity: 0.75;
-      font-family: var(--font-mono);
-    }
-
-    /* ----- PRIVACY STATEMENT ----- */
+    /* ----- PRIVACY NOTE ----- */
     .privacy-note {
       margin-top: 0.6rem;
       padding-top: 0.32rem;
@@ -536,51 +348,21 @@
       flex-wrap: wrap;
     }
 
-    .privacy-note .lock {
-      font-size: 0.72rem;
-    }
-
-    /* ----- UTILITY ----- */
-    .mt-0 { margin-top: 0; }
-    .mb-0 { margin-bottom: 0; }
-    .text-small { font-size: 0.68rem; }
-    .text-muted { color: var(--text-muted); }
-    .accent { color: var(--accent); }
+    .privacy-note .lock { font-size: 0.72rem; }
 
     @media print {
-      body {
-        background: white;
-        padding: 0.35in;
-        font-size: 0.85rem;
-      }
-      .resume {
-        box-shadow: none;
-        border: 1px solid #ccc;
-        padding: 0.15in;
-      }
-      .grid-cell {
-        border: 1px solid #ddd;
-        break-inside: avoid;
-      }
-      .privacy-badge {
-        opacity: 0.8;
-      }
-      a {
-        color: black;
-        text-decoration: underline;
-      }
-      .actions-bar,
-      .download-button {
-        display: none;
-      }
-      .privacy-note {
-        opacity: 0.8;
-      }
+      body { background: white; padding: 0.35in; font-size: 0.85rem; }
+      .resume { box-shadow: none; border: 1px solid #ccc; padding: 0.15in; }
+      .grid-cell { border: 1px solid #ddd; break-inside: avoid; }
+      .privacy-badge { opacity: 0.8; }
+      a { color: black; text-decoration: underline; }
+      .actions-bar, .download-button { display: none; }
+      .privacy-note { opacity: 0.8; }
     }
   </style>
 </head>
 <body>
-  <main class="resume" role="main">
+  <main class="resume" role="main" id="resume-content">
     <!-- HEADER -->
     <div class="header">
       <div class="header-left">
@@ -598,25 +380,20 @@
       </div>
     </div>
 
-    <!-- DOWNLOAD BAR -->
+    <!-- DOWNLOAD BUTTON -->
     <div class="actions-bar">
-      <button type="button" onclick="window.print()" class="download-button">⬇ PDF</button>
+      <button type="button" id="download-pdf" class="download-button">⬇ Download PDF</button>
     </div>
 
-    <!-- GRID: EXPERIENCE | SKILLS -->
-    <!--       EDUCATION (full width) -->
+    <!-- GRID -->
     <div class="grid-2x2">
-
-      <!-- TOP‑LEFT: PROFESSIONAL EXPERIENCE -->
       <section class="grid-cell" aria-labelledby="exp-heading">
         <h2 id="exp-heading">Professional Experience</h2>
-
         <div class="item">
           <div class="item-header">
             <span class="item-title">Cheeseburger Bobby's</span>
             <span class="item-date">3 years total</span>
           </div>
-
           <div class="program-group">
             <div class="program">
               <div class="program-header">
@@ -624,14 +401,12 @@
                 <span class="program-date">3 years</span>
               </div>
             </div>
-
             <div class="program">
               <div class="program-header">
                 <span class="program-title">Cashier</span>
                 <span class="program-date">2 years</span>
               </div>
             </div>
-
             <div class="program">
               <div class="program-header">
                 <span class="program-title">Tech</span>
@@ -640,7 +415,6 @@
             </div>
           </div>
         </div>
-
         <div class="item">
           <div class="item-header">
             <span class="item-title">Brand Ambassador</span>
@@ -648,7 +422,6 @@
           </div>
           <div class="item-sub">Known in Heaven</div>
         </div>
-
         <div class="item">
           <div class="item-header">
             <span class="item-title">Brand Ambassador</span>
@@ -656,7 +429,6 @@
           </div>
           <div class="item-sub">Saved by Christ Apparel</div>
         </div>
-
         <div class="item">
           <div class="item-header">
             <span class="item-title">Helper</span>
@@ -666,7 +438,6 @@
         </div>
       </section>
 
-      <!-- TOP‑RIGHT: SKILLS & FOCUS -->
       <section class="grid-cell" aria-labelledby="skills-heading">
         <h2 id="skills-heading">Skills &amp; Focus</h2>
         <ul class="skill-list">
@@ -681,30 +452,25 @@
         </ul>
       </section>
 
-      <!-- BOTTOM: EDUCATION (spans full width of the row) -->
       <section class="grid-cell span-full" aria-labelledby="edu-heading">
         <h2 id="edu-heading">Education</h2>
-
         <div class="item">
           <div class="item-header">
             <span class="item-title">MFA, Character Animation</span>
             <span class="item-date">2023 – present</span>
           </div>
         </div>
-
         <div class="item">
           <div class="item-header">
             <span class="item-title">Development</span>
             <span class="item-date">2026 – present</span>
           </div>
         </div>
-
         <div class="item">
           <div class="item-header">
             <span class="item-title">High School</span>
             <span class="item-date">2018 – 2022</span>
           </div>
-
           <div class="program-group">
             <div class="program">
               <div class="program-header">
@@ -712,7 +478,6 @@
               </div>
               <div class="program-note">Hands-on vinyl cutting &amp; application</div>
             </div>
-
             <div class="program">
               <div class="program-header">
                 <span class="program-title">Graphic Design</span>
@@ -722,17 +487,45 @@
           </div>
         </div>
       </section>
-
     </div>
 
-    <!-- PRIVACY STATEMENT -->
     <div class="privacy-note">
       <span class="lock" aria-hidden="true">🔐</span>
-      <span>Self‑contained resume. No external fonts, trackers, or analytics. The optional "PDF" button uses your browser's built‑in print dialog — nothing is uploaded or shared. All data stays on your device.</span>
+      <span>This page is fully self‑contained. You can download the PDF directly — no email, no sign‑up, no contact form, and no waiting. Nothing is sent anywhere and nothing is stored. Everything happens on your own device.</span>
     </div>
   </main>
-  <script src="https://support.jao.life/support.js"
-          crossorigin="anonymous"
-          defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    document.getElementById('download-pdf').addEventListener('click', function () {
+      const btn = this;
+      btn.disabled = true;
+      btn.textContent = 'Generating…';
+
+      const element = document.getElementById('resume-content');
+
+      // Temporarily hide the download button + privacy note during capture
+      const actionsBar = document.querySelector('.actions-bar');
+      const privacyNote = document.querySelector('.privacy-note');
+      if (actionsBar) actionsBar.style.display = 'none';
+      if (privacyNote) privacyNote.style.display = 'none';
+
+      const opt = {
+        margin:       [0.3, 0.3, 0.3, 0.3],
+        filename:     'John-Ogletree-Resume.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+
+      html2pdf().set(opt).from(element).save().then(function () {
+        // Restore UI
+        if (actionsBar) actionsBar.style.display = '';
+        if (privacyNote) privacyNote.style.display = '';
+        btn.disabled = false;
+        btn.textContent = '⬇ Download PDF';
+      });
+    });
+  </script>
 </body>
 </html>
