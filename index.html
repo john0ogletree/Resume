@@ -52,7 +52,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      padding: 0.3rem 0.6rem 0.6rem;
+      padding: 0.3rem 0.6rem 4.5rem; /* extra bottom padding for support overlay */
     }
 
     .resume {
@@ -215,7 +215,7 @@
       padding: 0;
       display: flex;
       flex-direction: column;
-      gap: 0.1rem;
+      gap: 0.12rem;
     }
 
     .print-tip ul li {
@@ -229,6 +229,14 @@
       font-weight: 700;
       color: var(--text-primary);
       margin-right: 0.2rem;
+    }
+
+    .print-tip ul li .note {
+      display: block;
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 0.02rem;
     }
 
     /* ----- 2×2 GRID ----- */
@@ -257,7 +265,7 @@
     .grid-cell.span-full { grid-column: 1 / -1; }
 
     @media (max-width: 700px) {
-      body { padding: 0.25rem 0.35rem 0.5rem; }
+      body { padding: 0.25rem 0.35rem 4rem; }
       .resume { padding: 0.6rem 0.5rem 0.65rem; }
       h1 { font-size: 1.05rem; }
       .header-right { text-align: left; width: 100%; align-self: flex-start; font-size: 0.6rem; }
@@ -266,6 +274,7 @@
       .print-tip .tip-title { font-size: 0.62rem; }
       .print-tip .tip-text,
       .print-tip ul li { font-size: 0.58rem; }
+      .print-tip ul li .note { font-size: 0.55rem; }
       .grid-2x2 { gap: 0.4rem 0.35rem; margin-top: 0.3rem; }
       .grid-cell { padding: 0.4rem 0.4rem 0.45rem; border-radius: 6px; }
       .grid-cell h2 { font-size: 0.65rem; padding-bottom: 0.08rem; margin-bottom: 0.25rem; border-bottom-width: 1px; }
@@ -287,12 +296,14 @@
     }
 
     @media (max-width: 380px) {
+      body { padding: 0.25rem 0.35rem 4rem; }
       .resume { padding: 0.5rem 0.4rem 0.55rem; }
       h1 { font-size: 0.95rem; }
       .print-tip { padding: 0.4rem 0.45rem; }
       .print-tip .tip-title { font-size: 0.58rem; }
       .print-tip .tip-text,
       .print-tip ul li { font-size: 0.54rem; }
+      .print-tip ul li .note { font-size: 0.5rem; }
       .grid-2x2 { gap: 0.3rem 0.25rem; }
       .grid-cell { padding: 0.35rem 0.35rem 0.4rem; }
       .grid-cell h2 { font-size: 0.6rem; }
@@ -464,9 +475,22 @@
           Browsers automatically add the page URL and title at the top when printing. To remove them, turn off <strong>“Headers and footers”</strong> in the print dialog:
         </div>
         <ul>
-          <li><span class="platform">Desktop:</span> More settings → uncheck “Headers and footers”</li>
-          <li><span class="platform">Chrome (mobile):</span> Expand settings → uncheck “Headers and footers”</li>
-          <li><span class="platform">Safari (mobile):</span> Tap “Options” → turn off “Header and Footer”</li>
+          <li>
+            <span class="platform">Desktop (Chrome, Edge, Firefox):</span> More settings → uncheck “Headers and footers”
+            <span class="note">Remembered — you only need to do this once.</span>
+          </li>
+          <li>
+            <span class="platform">Desktop (Safari):</span> Uncheck “Print headers and footers”
+            <span class="note">Remembered — you only need to do this once.</span>
+          </li>
+          <li>
+            <span class="platform">Mobile (Chrome, Android):</span> Expand settings → uncheck “Headers and footers”
+            <span class="note">May reset — check each time.</span>
+          </li>
+          <li>
+            <span class="platform">Mobile (Safari, iOS):</span> Tap “Options” → turn off “Header and Footer”
+            <span class="note">Resets each time — you’ll need to turn it off again before each print.</span>
+          </li>
         </ul>
       </div>
     </div>
