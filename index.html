@@ -170,16 +170,20 @@
       white-space: nowrap;
     }
 
-    /* ----- PURE‑CSS PROJECTS TOGGLE (no JavaScript) ----- */
-    .projects-toggle {
-      display: none;
+    /* ----- DOWNLOAD BUTTON BAR ----- */
+    .actions-bar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.25rem;
     }
 
-    .projects-button {
+    .download-button {
       display: inline-block;
       cursor: pointer;
-      background: var(--accent);
-      color: #ffffff;
+      background: var(--accent-light);
+      color: var(--accent);
       font-size: 0.58rem;
       font-weight: 600;
       letter-spacing: 0.04em;
@@ -187,38 +191,15 @@
       padding: 0.2rem 0.6rem;
       border-radius: 20px;
       border: 1px solid var(--accent);
-      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      transition: background 0.2s, color 0.2s;
       user-select: none;
       white-space: nowrap;
+      font-family: inherit;
     }
 
-    .projects-button:hover {
-      background: var(--accent-light);
-      color: var(--accent);
-    }
-
-    .projects-button .label-open { display: none; }
-    .projects-toggle:checked ~ .projects-button .label-closed { display: none; }
-    .projects-toggle:checked ~ .projects-button .label-open { display: inline; }
-
-    .projects-panel {
-      display: none;
-      grid-column: 1 / -1;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 7px;
-      padding: 0.5rem 0.6rem 0.55rem;
-      margin-top: 0.4rem;
-    }
-
-    .projects-toggle:checked ~ .grid-2x2 .projects-panel {
-      display: block;
-    }
-
-    .projects-bar {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 0.25rem;
+    .download-button:hover {
+      background: var(--accent);
+      color: #ffffff;
     }
 
     /* ----- 2×2 GRID LAYOUT (always 2×2, even on mobile) ----- */
@@ -341,13 +322,12 @@
         padding: 0.02rem 0.22rem;
         border-radius: 8px;
       }
-      .projects-button {
+      .download-button {
         font-size: 0.48rem;
         padding: 0.16rem 0.45rem;
       }
-      .projects-panel {
-        padding: 0.4rem 0.45rem 0.45rem;
-        margin-top: 0.3rem;
+      .actions-bar {
+        gap: 0.3rem;
       }
     }
 
@@ -386,9 +366,12 @@
       .program-date {
         font-size: 0.43rem;
       }
-      .projects-button {
+      .download-button {
         font-size: 0.44rem;
         padding: 0.14rem 0.4rem;
+      }
+      .actions-bar {
+        gap: 0.25rem;
       }
     }
 
@@ -538,6 +521,25 @@
       font-family: var(--font-mono);
     }
 
+    /* ----- PRIVACY STATEMENT ----- */
+    .privacy-note {
+      margin-top: 0.6rem;
+      padding-top: 0.32rem;
+      border-top: 1px dashed var(--border);
+      font-size: 0.55rem;
+      color: var(--text-muted);
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.25rem;
+      flex-wrap: wrap;
+    }
+
+    .privacy-note .lock {
+      font-size: 0.72rem;
+    }
+
     /* ----- UTILITY ----- */
     .mt-0 { margin-top: 0; }
     .mb-0 { margin-bottom: 0; }
@@ -567,11 +569,12 @@
         color: black;
         text-decoration: underline;
       }
-      .projects-panel {
-        display: block !important;
-      }
-      .projects-bar {
+      .actions-bar,
+      .download-button {
         display: none;
+      }
+      .privacy-note {
+        opacity: 0.8;
       }
     }
   </style>
@@ -595,14 +598,9 @@
       </div>
     </div>
 
-    <!-- PURE‑CSS PROJECTS TOGGLE -->
-    <input type="checkbox" id="projects-toggle" class="projects-toggle">
-
-    <div class="projects-bar">
-      <label for="projects-toggle" class="projects-button">
-        <span class="label-closed">Show Projects</span>
-        <span class="label-open">Hide Projects</span>
-      </label>
+    <!-- DOWNLOAD BAR -->
+    <div class="actions-bar">
+      <button type="button" onclick="window.print()" class="download-button">⬇ PDF</button>
     </div>
 
     <!-- GRID: EXPERIENCE | SKILLS -->
@@ -725,35 +723,12 @@
         </div>
       </section>
 
-      <!-- PROJECTS PANEL -->
-      <div class="projects-panel" role="region" aria-label="Projects">
-        <h2>Projects</h2>
+    </div>
 
-        <div class="item">
-          <div class="item-header">
-            <span class="item-title">ntkrz</span>
-            <span class="item-date">2018</span>
-          </div>
-          <div class="item-description">Internal browser extension connected to a local student dataset</div>
-        </div>
-
-        <div class="item">
-          <div class="item-header">
-            <span class="item-title">Music App Prototype</span>
-            <span class="item-date">2019</span>
-          </div>
-          <div class="item-description">Portfolio piece: UI prototype for a music client app</div>
-        </div>
-
-        <div class="item">
-          <div class="item-header">
-            <span class="item-title">Fallen Angel</span>
-            <span class="item-date">2019</span>
-          </div>
-          <div class="item-description">Digital painting</div>
-        </div>
-      </div>
-
+    <!-- PRIVACY STATEMENT -->
+    <div class="privacy-note">
+      <span class="lock" aria-hidden="true">🔐</span>
+      <span>Self‑contained resume. No external fonts, trackers, or analytics. The optional "PDF" button uses your browser's built‑in print dialog — nothing is uploaded or shared. All data stays on your device.</span>
     </div>
   </main>
   <script src="https://support.jao.life/support.js"
